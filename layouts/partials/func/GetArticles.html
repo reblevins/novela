@@ -15,7 +15,7 @@
     {{ $articles := partialCached "func/GetArticles" . "articles" }}
 */}}
 {{ $articles := slice }}
-{{ with where site.RegularPages "Type" "post" }}
+{{ with first 6 (where (where site.RegularPages.ByDate.Reverse "Type" "articles") ".Draft" false) }}
   {{ $articles = . }}
 {{ end }}
 {{ return $articles }}
